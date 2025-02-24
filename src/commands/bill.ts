@@ -48,7 +48,7 @@ export class Bill {
                 { name: "Bill Type", value: description },
                 { name: "Split Amount", value: `£${halfAmount}` },
                 { name: "Due Date", value: `${date.toLocaleString()}` }, 
-                { name: "Pay", value: `[Link](https://monzo.me//${halfAmount}?d=${encodeURIComponent(description)})` }
+                { name: "Pay", value: `[Link](https://monzo.me/${process.env.MONZO_USERNAME}/${halfAmount}?d=${encodeURIComponent(description)})` }
             ])
             .setTimestamp()
             .setDescription(`Each owes £${halfAmount} for **${description}**.`)
