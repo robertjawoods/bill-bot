@@ -1,10 +1,14 @@
 import {IntentsBitField} from "discord.js";
 import {Client} from "discordx";
 import {dirname, importx} from "@discordx/importer";
+import express from 'express';
+
 import 'dotenv/config'
 
 export class Main {
   private static _client: Client;
+
+  private static app = express();
 
   static get Client(): Client {
     return this._client;
@@ -47,8 +51,16 @@ export class Main {
       throw Error("Could not find BOT_TOKEN in your environment");
     }
 
-    console.log(process.env);
-    
+    this.app.use(express.json());
+
+    this.app.get("/healthz", (req, res) => {
+      res.sendStatus(200);
+    })
+
+    this.app.listen("4000", () => {
+      console.log("Listening on 4000")
+    })
+
     await this._client.login(process.env.BOT_TOKEN);
   }
 }
