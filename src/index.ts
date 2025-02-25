@@ -1,7 +1,6 @@
-
-import { IntentsBitField } from "discord.js";
-import { Client } from "discordx";
-import { dirname, importx } from "@discordx/importer";
+import {IntentsBitField} from "discord.js";
+import {Client} from "discordx";
+import {dirname, importx} from "@discordx/importer";
 import 'dotenv/config'
 
 export class Main {
@@ -20,6 +19,7 @@ export class Main {
         IntentsBitField.Flags.Guilds,
         IntentsBitField.Flags.GuildMembers,
         IntentsBitField.Flags.MessageContent,
+
       ],
       silent: false,
       botGuilds: ["1340732544034799646"]
@@ -32,7 +32,7 @@ export class Main {
 
     });
 
-    this.Client.on("messageReactionAdd", (reaction, user) => { 
+    this.Client.on("messageReactionAdd", (reaction, user) => {
       this.Client.executeReaction(reaction, user);
     });
 
@@ -47,6 +47,8 @@ export class Main {
       throw Error("Could not find BOT_TOKEN in your environment");
     }
 
+    console.log(process.env);
+    
     await this._client.login(process.env.BOT_TOKEN);
   }
 }
